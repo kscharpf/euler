@@ -23,6 +23,16 @@ primeFactors (x:xs) n ys
     | (mod n x) == 0 = (primeFactors (x:xs) (n `div` x) (ys ++ [x]))
     | otherwise = primeFactors xs n ys
 
+
+primeFactorsFull :: [Integer] -> Integer -> [Integer] -> [Integer]
+primeFactorsFull xs n [] = primeFactorsFull ys n ys
+                           where ys = primeFactors xs n []
+primeFactorsFull [] n ys = ys
+primeFactorsFull (x:xs) n ys 
+    | not $ y `elem` ys = (primeFactorsFull xs n ys) ++ [y]
+    | otherwise = (primeFactorsFull xs n ys) 
+      where y = n `div` x
+
 (^!) :: Num a => a -> Int -> a
 (^!) x n = x^n
  
@@ -47,4 +57,5 @@ squareRoot n =
 
 --main :: IO()
 --main = interact showFactorsS
-main = putStrLn (show (primeFactors (defaultPossiblePrimes $ squareRoot 600851475143) 600851475143 []))
+--main = putStrLn (show (primeFactors (defaultPossiblePrimes $ squareRoot 600851475143) 600851475143 []))
+main = putStrLn (show (primeFactorsFull (defaultPossiblePrimes $ squareRoot 15) 15 []))
