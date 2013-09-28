@@ -28,10 +28,10 @@ primeFactorsFull :: [Integer] -> Integer -> [Integer] -> [Integer]
 primeFactorsFull xs n [] = primeFactorsFull ys n ys
                            where ys = primeFactors xs n []
 primeFactorsFull [] n ys = ys
-primeFactorsFull (x:xs) n ys 
-    | not $ y `elem` ys = (primeFactorsFull xs n ys) ++ [y]
-    | otherwise = (primeFactorsFull xs n ys) 
-      where y = n `div` x
+primeFactorsFull xs n ys 
+    | not $ y `elem` ys = ys ++ [y]
+    | otherwise = ys 
+      where y = n `div` (last xs)
 
 (^!) :: Num a => a -> Int -> a
 (^!) x n = x^n
