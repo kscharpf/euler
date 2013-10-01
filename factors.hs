@@ -20,7 +20,7 @@ defaultPossiblePrimes numberToFactor = primesToQ numberToFactor
 primeFactors :: [Integer] -> Integer -> [Integer] -> [Integer]
 primeFactors [] n ys = ys
 primeFactors (x:xs) n ys
-    | (mod n x) == 0 = (primeFactors (x:xs) (n `div` x) (ys ++ [x]))
+    | (mod n x) == 0 = (primeFactors xs (n `div` x) (ys ++ [x]))
     | otherwise = primeFactors xs n ys
 
 
@@ -57,5 +57,5 @@ squareRoot n =
 
 --main :: IO()
 --main = interact showFactorsS
---main = putStrLn (show (primeFactors (defaultPossiblePrimes $ squareRoot 600851475143) 600851475143 []))
-main = putStrLn (show (primeFactorsFull (defaultPossiblePrimes $ squareRoot 15) 15 []))
+main = putStrLn (show (primeFactors (defaultPossiblePrimes $ squareRoot 600851475143) 600851475143 []))
+--main = putStrLn (show (primeFactorsFull (defaultPossiblePrimes $ squareRoot 54893) 54893 []))
